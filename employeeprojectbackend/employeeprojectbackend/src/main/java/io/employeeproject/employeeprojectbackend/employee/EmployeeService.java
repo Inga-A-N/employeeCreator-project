@@ -5,6 +5,8 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import io.employeeproject.employeeprojectbackend.employee.Employee.ContractType;
+import io.employeeproject.employeeprojectbackend.employee.Employee.WorkBasis;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -17,20 +19,19 @@ public class EmployeeService {
     public Employee create(CreateEmployeeDTO data) {
 //	clean up data
 	String employeeFirstName = data.getFirstName().trim();
-//	if(data.getMiddleName() != "null") {
-//	String employeeMiddleName = data.getMiddleName().trim();
-//		}else{
-	String employeeMiddleName = data.getMiddleName(); 
-//		};
+	String employeeMiddleName; 
+	if(data.getMiddleName() != "null") {
+		employeeMiddleName = data.getMiddleName().trim();
+	}else {employeeMiddleName = data.getMiddleName();}
 	String employeeLastName = data.getLastName().trim();
 	String employeeAddress = data.getAddress().trim();
 	String employeePhoneNumber = data.getPhoneNumber().trim();
 	String employeeEmail = data.getEmail().trim();
-	String employeeContractType = data.getContractType();
+	ContractType employeeContractType = data.getContractType();
 	Date employeeStartDate = data.getStartDate();
 	Date employeeFinishDate = data.getFinishDate();
-	String employeeWorkBasis = data.getWorkBasis();
-	Long employeeHoursPerWeek = data.getHoursPerWeek();
+	WorkBasis employeeWorkBasis = data.getWorkBasis();
+	Float employeeHoursPerWeek = data.getHoursPerWeek();
 	
 	Employee newEmployee = new Employee(employeeFirstName,employeeMiddleName, employeeLastName,
 		employeeEmail, employeePhoneNumber, employeeAddress,

@@ -4,6 +4,8 @@ import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -14,7 +16,20 @@ import lombok.Setter;
 @Entity
 @Table(name = "employees")
 
+
+
 public class Employee {
+    
+    public enum ContractType {
+	    Contract,
+	    Permanent
+	}
+    
+    public enum WorkBasis {
+	    Part_time,
+	    Full_time
+	}
+    
     
 //    Adding primary key
     @Id
@@ -55,7 +70,8 @@ public class Employee {
     @Column
     @Getter
     @Setter
-    private String contractType;
+    @Enumerated(EnumType.STRING)
+    private ContractType contractType;
     
     @Column
     @Getter
@@ -70,19 +86,20 @@ public class Employee {
     @Column
     @Getter
     @Setter
-    private String workBasis;
+    @Enumerated(EnumType.STRING)
+    private WorkBasis workBasis;
     
     @Column
     @Getter
     @Setter
-    private Long hoursPerWeek;
+    private Float hoursPerWeek;
     
     public Employee() {};
     
     public Employee(String firstName,String middleName, String lastName,
 	    String email, String phoneNumber, String address,
-	    String contractType, Date startDate, Date finishDate,
-	    String workBasis, Long hoursPerWeek) {
+	    ContractType contractType, Date startDate, Date finishDate,
+	    WorkBasis workBasis, Float hoursPerWeek) {
 	this.firstName = firstName;
 	this.middleName = middleName;
 	this.lastName = lastName;
@@ -152,11 +169,11 @@ public class Employee {
 //        this.address = address;
 //    }
 //
-//    public String getContractType() {
+//    public ContractType getContractType() {
 //        return contractType;
 //    }
 //
-//    public void setContractType(String contractType) {
+//    public void setContractType(ContractType contractType) {
 //        this.contractType = contractType;
 //    }
 //
@@ -176,19 +193,19 @@ public class Employee {
 //        this.finishDate = finishDate;
 //    }
 //
-//    public String getWorkBasis() {
+//    public WorkBasis getWorkBasis() {
 //        return workBasis;
 //    }
 //
-//    public void setWorkBasis(String workBasis) {
+//    public void setWorkBasis(WorkBasis workBasis) {
 //        this.workBasis = workBasis;
 //    }
 //
-//    public Long getHoursPerWeek() {
+//    public Float getHoursPerWeek() {
 //        return hoursPerWeek;
 //    }
 //
-//    public void setHoursPerWeek(Long hoursPerWeek) {
+//    public void setHoursPerWeek(Float hoursPerWeek) {
 //        this.hoursPerWeek = hoursPerWeek;
 //    };
     

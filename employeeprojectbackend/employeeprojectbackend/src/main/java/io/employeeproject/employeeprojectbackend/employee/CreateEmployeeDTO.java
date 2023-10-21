@@ -2,6 +2,8 @@ package io.employeeproject.employeeprojectbackend.employee;
 
 import java.util.Date;
 
+import io.employeeproject.employeeprojectbackend.employee.Employee.ContractType;
+import io.employeeproject.employeeprojectbackend.employee.Employee.WorkBasis;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -39,10 +41,10 @@ public class CreateEmployeeDTO {
     @Setter
     String address;
     
-    @NotBlank
+//    @NotBlank
     @Getter
     @Setter
-    String contractType;
+    ContractType contractType;
     
     @NotNull
     @Getter
@@ -53,20 +55,21 @@ public class CreateEmployeeDTO {
     @Setter
     Date finishDate;
     
-    @NotBlank
+    
+//    @NotBlank
     @Getter
     @Setter
-    String workBasis;
+    WorkBasis workBasis;
     
     @NotNull
     @Getter
     @Setter
-    Long hoursPerWeek;
+    Float hoursPerWeek;
     
     public CreateEmployeeDTO(String firstName,String middleName, String lastName,
 	    String email, String phoneNumber, String address,
-	    String contractType, Date startDate, Date finishDate,
-	    String workBasis, Long hoursPerWeek) {
+	    ContractType contractType, Date startDate, Date finishDate,
+	    WorkBasis workBasis, Float hoursPerWeek) {
 	this.firstName = firstName;
 	this.middleName = middleName;
 	this.lastName = lastName;
@@ -128,11 +131,11 @@ public class CreateEmployeeDTO {
         this.address = address;
     }
 
-    public String getContractType() {
+    public ContractType getContractType() {
         return contractType;
     }
 
-    public void setContractType(String contractType) {
+    public void setContractType(ContractType contractType) {
         this.contractType = contractType;
     }
 
@@ -152,19 +155,19 @@ public class CreateEmployeeDTO {
         this.finishDate = finishDate;
     }
 
-    public String getWorkBasis() {
+    public WorkBasis getWorkBasis() {
         return workBasis;
     }
 
-    public void setWorkBasis(String workBasis) {
+    public void setWorkBasis(WorkBasis workBasis) {
         this.workBasis = workBasis;
     }
 
-    public Long getHoursPerWeek() {
+    public Float getHoursPerWeek() {
         return hoursPerWeek;
     }
 
-    public void setHoursPerWeek(Long hoursPerWeek) {
+    public void setHoursPerWeek(Float hoursPerWeek) {
         this.hoursPerWeek = hoursPerWeek;
     }
     
