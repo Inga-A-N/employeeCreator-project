@@ -1,6 +1,7 @@
 package io.employeeproject.employeeprojectbackend.employee;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,10 @@ public class EmployeeService {
 	Employee createdEmployee = this.employeeRepository.save(newEmployee);
 	
 	return createdEmployee;
+    }
+    
+    public List<Employee> findAll(){
+	return this.employeeRepository.findAll();
     }
 
 }
