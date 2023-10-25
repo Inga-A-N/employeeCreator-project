@@ -2,6 +2,7 @@ package io.employeeproject.employeeprojectbackend.employee;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,6 +47,11 @@ public class EmployeeService {
     
     public List<Employee> findAll(){
 	return this.employeeRepository.findAll();
+    }
+    
+    public Optional<Employee> findById(Long id){
+	Optional<Employee> optionalEmployee = this.employeeRepository.findById(id);
+	return optionalEmployee;
     }
 
 }

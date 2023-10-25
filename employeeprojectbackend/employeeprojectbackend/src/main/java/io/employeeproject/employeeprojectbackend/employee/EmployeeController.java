@@ -1,16 +1,19 @@
 package io.employeeproject.employeeprojectbackend.employee;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.employeeproject.employeeprojectbackend.exception.NotFoundException;
 import jakarta.validation.Valid;
 
 @RestController
@@ -34,10 +37,24 @@ public class EmployeeController {
     
 //    READ
     
+    //Get all
+    
     @GetMapping
     public ResponseEntity<List<Employee>> getAll(){
 	List<Employee> allEmployees = this.employeeService.findAll();
 	return new ResponseEntity<>(allEmployees, HttpStatus.OK);
     }
+    
+    // Get by ID
+    
+    @GetMapping("/{id}")
+    public ResponseEntity<Employee> getById(@PathVariable Long id){
+	Optional<Employee> foundEmployee = this.employeeService.findById(id);
+	if(foundEmployee.isEmpty()) {
+	    throw new NotFoundException(String.format("Employee with id: %s not found", id));
+	}
+	return new ResponseEntity<>(foundEmployee.get(), HttpStatus.OK);
+    }
+    
 
 }
