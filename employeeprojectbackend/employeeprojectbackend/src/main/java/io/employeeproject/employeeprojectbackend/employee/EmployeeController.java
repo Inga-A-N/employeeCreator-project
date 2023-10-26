@@ -6,7 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -56,5 +58,24 @@ public class EmployeeController {
 	return new ResponseEntity<>(foundEmployee.get(), HttpStatus.OK);
     }
     
+    
+//    DELETE
+    
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Employee> deleteByID(@PathVariable Long id) {
+	boolean deletedEmployee = this.employeeService.deleteById(id);
+	
+	if(!deletedEmployee) {
+	    throw new NotFoundException(String.format("Employee with id: %s not found, could not delete.", id));
+	}
+	return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+    }
+    
+//    UPDATE
+    
+    @PatchMapping("/{id}")
+    public void updateById(@PathVariable Long id, @Valid @RequestBody UpdateEmployeeDTO data){
+	System.out.println(data.firstName);
+    }
 
 }

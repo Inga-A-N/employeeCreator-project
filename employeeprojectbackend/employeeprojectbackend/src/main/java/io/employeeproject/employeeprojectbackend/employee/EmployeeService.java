@@ -53,5 +53,16 @@ public class EmployeeService {
 	Optional<Employee> optionalEmployee = this.employeeRepository.findById(id);
 	return optionalEmployee;
     }
+    
+    public boolean deleteById(long id) {
+	Optional<Employee> optionalEmployee = this.findById(id);
+	
+	if(optionalEmployee.isEmpty()) {
+	    return false;
+	}
+	
+	this.employeeRepository.delete(optionalEmployee.get());
+	return true;
+    }
 
 }
