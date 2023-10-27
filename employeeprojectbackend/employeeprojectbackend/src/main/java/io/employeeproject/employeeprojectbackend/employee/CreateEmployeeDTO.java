@@ -7,6 +7,7 @@ import io.employeeproject.employeeprojectbackend.employee.Employee.WorkBasis;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,7 +33,9 @@ public class CreateEmployeeDTO {
     @Setter
     String email;
     
+//    @NotBlank
     @Size(min = 8)
+    @Pattern(regexp = "([0-9]|\\+|\\(|\\))")
     @Getter
     @Setter
     String phoneNumber;

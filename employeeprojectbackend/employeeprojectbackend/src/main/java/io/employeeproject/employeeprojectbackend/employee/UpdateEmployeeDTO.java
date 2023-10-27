@@ -15,22 +15,24 @@ import lombok.Setter;
 public class UpdateEmployeeDTO {
     
 //    @Size(min = 1)
-    @Pattern(regexp = "^(?=\\S).*$", message="Title cannot be an empty string")
+    @Pattern(regexp = "^(?=\\S).*$", message="First name cannot be an empty string")
     String firstName;
      
     
     String middleName;
     
-    @Pattern(regexp = "^(?=\\S).*$", message="Title cannot be an empty string")
+    @Pattern(regexp = "^(?=\\S).*$", message="Last name cannot be an empty string")
     String lastName;
       
-//    @Email(message = "Please provide a valid email address")
+    @Email(message = "Please provide a valid email address")
     String email;
     
-    
+
     @Size(min = 8)
+    @Pattern(regexp = "([0-9]|\\+|\\(|\\))", message = "Phone number cannot contain any characters other than numbers, +()")
     String phoneNumber;
         
+    @Pattern(regexp = "^(?=\\S).*$", message="Address cannot be an empty string")
     String address;
     
     ContractType contractType;
