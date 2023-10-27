@@ -74,8 +74,14 @@ public class EmployeeController {
 //    UPDATE
     
     @PatchMapping("/{id}")
-    public void updateById(@PathVariable Long id, @Valid @RequestBody UpdateEmployeeDTO data){
+    public ResponseEntity<Employee> updateById(@PathVariable Long id, @Valid @RequestBody UpdateEmployeeDTO data){
 	System.out.println(data.firstName);
+	Optional<Employee> optionalUpdatedEmployee = this.employeeService.updateById(id, data);
+	if(optionalUpdatedEmployee.isEmpty()) {
+	    throw new NotFoundException(String.format("Post with id: %s not found, could not update.", id));
+	}
+	return new ResponseEntity<Employee>(optionalUpdatedEmployee.get(), HttpStatus.OK);
     }
+    
 
 }

@@ -14,39 +14,121 @@ import lombok.Setter;
 
 public class UpdateEmployeeDTO {
     
-    @Size(min = 1)
+//    @Size(min = 1)
     @Pattern(regexp = "^(?=\\S).*$", message="Title cannot be an empty string")
     String firstName;
-    
+     
     
     String middleName;
     
-    
+    @Pattern(regexp = "^(?=\\S).*$", message="Title cannot be an empty string")
     String lastName;
-    
-    
-    @Email(message = "Please provide a valid email address")
+      
+//    @Email(message = "Please provide a valid email address")
     String email;
     
     
+    @Size(min = 8)
     String phoneNumber;
-    
-    
+        
     String address;
     
-
     ContractType contractType;
-    
-    
+        
     Date startDate;
-    
-    
+        
     Date finishDate;
-    
-    
+        
     WorkBasis workBasis;
-    
-    
+        
     Float hoursPerWeek;
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public ContractType getContractType() {
+        return contractType;
+    }
+
+    public void setContractType(ContractType contractType) {
+        this.contractType = contractType;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getFinishDate() {
+        return finishDate;
+    }
+
+    public void setFinishDate(Date finishDate) {
+        this.finishDate = finishDate;
+    }
+
+    public WorkBasis getWorkBasis() {
+        return workBasis;
+    }
+
+    public void setWorkBasis(WorkBasis workBasis) {
+        this.workBasis = workBasis;
+    }
+
+    public Float getHoursPerWeek() {
+        return hoursPerWeek;
+    }
+
+    public void setHoursPerWeek(Float hoursPerWeek) {
+        this.hoursPerWeek = hoursPerWeek;
+    }
 
 }
