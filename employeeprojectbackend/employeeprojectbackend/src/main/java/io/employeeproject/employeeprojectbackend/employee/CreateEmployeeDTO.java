@@ -35,7 +35,7 @@ public class CreateEmployeeDTO {
     
 //    @NotBlank
     @Size(min = 8)
-    @Pattern(regexp = "([0-9]|\\+|\\(|\\))")
+    @Pattern(regexp = "(^([0-9]|\\+|\\(|\\))*$)", message = "Phone number cannot contain any character, except numbers, + or ().")
     @Getter
     @Setter
     String phoneNumber;
