@@ -2,6 +2,8 @@ package io.employeeproject.employeeprojectbackend.employee;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import io.employeeproject.employeeprojectbackend.employee.Employee.ContractType;
 import io.employeeproject.employeeprojectbackend.employee.Employee.WorkBasis;
 import jakarta.validation.constraints.Email;
@@ -53,6 +55,7 @@ public class CreateEmployeeDTO {
     @NotNull
     @Getter
     @Setter
+    @JsonFormat(pattern = "dd/MM/yyyy")
     Date startDate;
     
     @Getter

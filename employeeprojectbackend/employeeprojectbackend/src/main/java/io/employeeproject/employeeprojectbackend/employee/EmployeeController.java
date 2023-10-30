@@ -31,6 +31,7 @@ public class EmployeeController {
     public ResponseEntity<Employee> createEmployee(@Valid @RequestBody CreateEmployeeDTO data){
 	System.out.println(data.firstName);
 	System.out.println(data.lastName);
+	System.out.println(data.startDate);
 	
 	Employee createdEmployee = this.employeeService.create(data);
 	return new ResponseEntity<>(createdEmployee, HttpStatus.CREATED);
