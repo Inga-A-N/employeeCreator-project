@@ -37,19 +37,23 @@ function EmployeeCard({
   //   const sd = dateFormat({ startDate }.startDate);
 
   return (
-    <div>
-      <div>
-        <h3>
+    <div className="mx-auto my-2 flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+      <div className="flex flex-col justify-between p-4 leading-normal">
+        <h3 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
           {firstName} {lastName}
         </h3>
-      </div>
-      <div>
-        <p>
+
+        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
           {contractType} - {dateFormat({ startDate }.startDate)}-
           {dateFormat({ finishDate }.finishDate)}
         </p>
       </div>
       <div>Email: {email}</div>
+      <div className="flex gap-5">
+        <button>Edit</button>
+        <button>Remove</button>
+      </div>
+
       {/* <h3>First name: {firstName}</h3>
       <h3>Middle name: {middleName}</h3>
       <h3>Last name: {lastName}</h3>
