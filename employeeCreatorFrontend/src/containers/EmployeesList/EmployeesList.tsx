@@ -1,6 +1,6 @@
 import EmployeeCard from "../../components/EmployeeCard/EmployeeCard";
 
-function EmployeesList({ employees }) {
+function EmployeesList({ employees, setRefresh, refresh }) {
   return (
     <div>
       {employees.length > 0 &&
@@ -18,7 +18,14 @@ function EmployeesList({ employees }) {
             workBasis: String;
             hoursPerWeek: String;
           }) => {
-            return <EmployeeCard key={employee.id} employee={employee} />;
+            return (
+              <EmployeeCard
+                key={employee.id}
+                employee={employee}
+                setRefresh={setRefresh}
+                refresh={refresh}
+              />
+            );
           }
         )}
     </div>

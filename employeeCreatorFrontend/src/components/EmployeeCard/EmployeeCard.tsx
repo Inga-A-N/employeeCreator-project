@@ -1,9 +1,13 @@
+import { deleteEmployeeById } from "../../services/employees";
 import { dateFormat } from "../../utils/dateFormat";
 
 function EmployeeCard({
   employee,
+  setRefresh,
+  refresh,
 }: {
   employee: {
+    id: Number;
     firstName: String;
     middleName: String;
     lastName: String;
@@ -18,17 +22,18 @@ function EmployeeCard({
   };
 }) {
   const {
+    id,
     firstName,
-    middleName,
+    // middleName,
     lastName,
     email,
-    phoneNumber,
-    address,
+    // phoneNumber,
+    // address,
     contractType,
     startDate,
     finishDate,
-    workBasis,
-    hoursPerWeek,
+    // workBasis,
+    // hoursPerWeek,
   } = employee;
   console.log(new Date({ startDate }.startDate).toLocaleDateString());
 
@@ -36,9 +41,19 @@ function EmployeeCard({
 
   //   const sd = dateFormat({ startDate }.startDate);
 
+  const handleRemove = async () => {
+    try {
+      await deleteEmployeeById(id);
+      console.log("Deleted:", id);
+      setRefresh(refresh + 1);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
-    <div className="mx-auto my-2 flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-      <div className="flex flex-col justify-between p-4 leading-normal">
+    <div className="mx-auto my-2 flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 justify-around">
+      <div className="flex flex-col p-4 leading-normal">
         <h3 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
           {firstName} {lastName}
         </h3>
@@ -48,10 +63,15 @@ function EmployeeCard({
           {dateFormat({ finishDate }.finishDate)}
         </p>
       </div>
-      <div>Email: {email}</div>
-      <div className="flex gap-5">
+      <div>
+        <p>Email:</p>
+        <p>{email}</p>
+      </div>
+      <div className="flex justify-end gap-2 self-start ">
         <button>Edit</button>
-        <button>Remove</button>
+        <button className="border-l-2 pl-2" onClick={handleRemove}>
+          Remove
+        </button>
       </div>
 
       {/* <h3>First name: {firstName}</h3>

@@ -2,9 +2,13 @@ import { useEffect, useState } from "preact/hooks";
 import "./app.css";
 import { getAllEmployees } from "./services/employees";
 import EmployeesList from "./containers/EmployeesList/EmployeesList";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import CreateEmployeeForm from "./components/CreateEmployeeForm/CreateEmployeeForm";
+import NavBar from "./components/NavBar/NavBar";
 
 export function App() {
   const [employees, setEmployees] = useState([]);
+  const [refresh, setRefresh] = useState(0);
 
   useEffect(() => {
     getAllEmployees().then((res) => {
@@ -14,9 +18,25 @@ export function App() {
   }, []);
 
   return (
-    <>
-      <h1 className="text-xl font-bold text-red-500">Hello</h1>
-      <EmployeesList employees={employees} />
-    </>
+    <div className="relative top-16 ">
+      <h1 className="text-xl font-bold">Employees list</h1>
+      <BrowserRouter>
+        <NavBar />
+
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <EmployeesList
+                employees={employees}
+                refresh={refresh}
+                setRefresh={setRefresh}
+              />
+            }
+          />
+          <Route path="/new-employee" element={<CreateEmployeeForm />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
