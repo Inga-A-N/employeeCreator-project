@@ -15,11 +15,10 @@ export function App() {
       setEmployees(res);
       console.log(res);
     });
-  }, []);
+  }, [refresh]);
 
   return (
     <div className="relative top-16 ">
-      <h1 className="text-xl font-bold">Employees list</h1>
       <BrowserRouter>
         <NavBar />
 

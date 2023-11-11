@@ -3,9 +3,11 @@ import EmployeeCard from "../../components/EmployeeCard/EmployeeCard";
 function EmployeesList({ employees, setRefresh, refresh }) {
   return (
     <div>
+      <h1 className="text-xl font-bold">Employees list</h1>
       {employees.length > 0 &&
         employees.map(
           (employee: {
+            id: Number;
             firstName: String;
             middleName: String;
             lastName: String;
