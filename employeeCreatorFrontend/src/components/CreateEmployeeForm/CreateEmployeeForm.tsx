@@ -150,6 +150,7 @@ function CreateEmployeeForm() {
               value="Permanent"
               className="w-4 h-4 text-[#04c4b2] border-gray-300 focus:ring-2 focus:ring-[#04c4b2] dark:focus:ring-[#058078] dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
               checked
+              onClick={handleChange}
             />
             <label
               for="type-option-1"
@@ -166,7 +167,8 @@ function CreateEmployeeForm() {
               name="contractType"
               value="Contract"
               className="w-4 h-4 text-[#04c4b2] border-gray-300 focus:ring-2 focus:ring-[#04c4b2] dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
-              onChange={handleChange}
+              checked={newEmployeeData.contractType === "Contract"}
+              onClick={handleChange}
             />
             <label
               for="type-option-2"
@@ -228,6 +230,7 @@ function CreateEmployeeForm() {
               value="Full_time"
               className="w-4 h-4 text-[#04c4b2] border-gray-300 focus:ring-2 focus:ring-[#04c4b2] dark:focus:ring-[#058078] dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
               checked
+              onClick={handleChange}
             />
             <label
               for="type-option-1"
@@ -244,6 +247,8 @@ function CreateEmployeeForm() {
               name="workBasis"
               value="Part_time"
               className="w-4 h-4 text-[#04c4b2] border-gray-300 focus:ring-2 focus:ring-[#04c4b2] dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
+              checked={newEmployeeData.workBasis === "Part_time"}
+              onClick={handleChange}
             />
             <label
               for="type-option-2"
