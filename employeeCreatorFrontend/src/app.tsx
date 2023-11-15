@@ -33,7 +33,12 @@ export function App() {
               />
             }
           />
-          <Route path="/new-employee" element={<CreateEmployeeForm />} />
+          <Route
+            path="/new-employee"
+            element={
+              <CreateEmployeeForm refresh={refresh} setRefresh={setRefresh} />
+            }
+          />
         </Routes>
       </BrowserRouter>
     </div>
