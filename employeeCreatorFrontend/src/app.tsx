@@ -5,6 +5,7 @@ import EmployeesList from "./containers/EmployeesList/EmployeesList";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CreateEmployeeForm from "./components/CreateEmployeeForm/CreateEmployeeForm";
 import NavBar from "./components/NavBar/NavBar";
+import EditEmployeeForm from "./components/EditEmployeeForm/EditEmployeeForm";
 
 export function App() {
   const [employees, setEmployees] = useState([]);
@@ -37,6 +38,12 @@ export function App() {
             path="/new-employee"
             element={
               <CreateEmployeeForm refresh={refresh} setRefresh={setRefresh} />
+            }
+          />
+          <Route
+            path="/edit-employee/:id"
+            element={
+              <EditEmployeeForm refresh={refresh} setRefresh={setRefresh} />
             }
           />
         </Routes>

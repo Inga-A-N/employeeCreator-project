@@ -1,35 +1,61 @@
-import { useState } from "preact/hooks";
-import { createNewEmployee } from "../../services/employees";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "preact/hooks";
+import { editEmployeeById, getEmployeeById } from "../../services/employees";
+import { useNavigate, useParams } from "react-router-dom";
+import { dateFormat } from "../../utils/dateFormat";
 
-function CreateEmployeeForm({ refresh, setRefresh }) {
-  const initialData = {
-    firstName: "",
-    middleName: "",
-    lastName: "",
-    email: "",
-    phoneNumber: "",
-    address: "",
-    contractType: "Permanent",
-    startDate: "",
-    finishDate: "",
-    workBasis: "Full_time",
-    hoursPerWeek: 0,
-  };
-  const [newEmployeeData, setNewEmployeeData] = useState(initialData);
+function EditEmployeeForm() {
+  //   const initialData = {
+  //     firstName: "",
+  //     middleName: "",
+  //     lastName: "",
+  //     email: "",
+  //     phoneNumber: "",
+  //     address: "",
+  //     contractType: "Permanent",
+  //     startDate: "",
+  //     finishDate: "",
+  //     workBasis: "Full_time",
+  //     hoursPerWeek: 0,
+  //   };
+
+  const { id } = useParams();
+
+  const [editEmployeeData, setEditEmployeeData] = useState({});
   const [error, setError] = useState(false);
+  useEffect(() => {
+    console.log("useEffect", id);
+    getEmployeeById(parseInt(id)).then((res) => {
+      setEditEmployeeData(res);
+      console.log(id);
+      console.log(res);
+    });
+  }, [id]);
+
+  const {
+    firstName,
+    middleName,
+    lastName,
+    email,
+    phoneNumber,
+    address,
+    contractType,
+    startDate,
+    finishDate,
+    workBasis,
+    hoursPerWeek,
+  } = editEmployeeData;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setNewEmployeeData({ ...newEmployeeData, [name]: value });
+    setEditEmployeeData({ ...editEmployeeData, [name]: value });
   };
 
   const navigate = useNavigate();
   const handleSubmit = async (e: Event) => {
     e.preventDefault();
-    console.log(newEmployeeData, "data to send");
+    console.log(editEmployeeData, "data to send");
     try {
-      await createNewEmployee(newEmployeeData);
+      await editEmployeeById(id, editEmployeeData);
       setRefresh(refresh + 1);
       navigate("/");
     } catch (e) {
@@ -45,7 +71,7 @@ function CreateEmployeeForm({ refresh, setRefresh }) {
 
   return (
     <>
-      <h1 className="text-xl font-bold pb-7">Create new employee</h1>
+      <h1 className="text-xl font-bold pb-7">Edit employee information</h1>
 
       <form onSubmit={handleSubmit}>
         <div className="relative z-0 w-full mb-6 group">
@@ -57,6 +83,7 @@ function CreateEmployeeForm({ refresh, setRefresh }) {
             placeholder=" "
             required
             onChange={handleChange}
+            value={firstName}
           />
           <label
             for="firstName"
@@ -73,6 +100,7 @@ function CreateEmployeeForm({ refresh, setRefresh }) {
             className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-[#058078] peer"
             placeholder=" "
             onChange={handleChange}
+            value={middleName}
           />
           <label
             for="middleName"
@@ -90,6 +118,7 @@ function CreateEmployeeForm({ refresh, setRefresh }) {
             placeholder=" "
             required
             onChange={handleChange}
+            value={lastName}
           />
           <label
             for="lastName"
@@ -107,6 +136,7 @@ function CreateEmployeeForm({ refresh, setRefresh }) {
             placeholder=" "
             required
             onChange={handleChange}
+            value={address}
           />
           <label
             for="address"
@@ -126,6 +156,7 @@ function CreateEmployeeForm({ refresh, setRefresh }) {
               placeholder=" "
               required
               onChange={handleChange}
+              value={email}
             />
             <label
               for="email"
@@ -145,6 +176,7 @@ function CreateEmployeeForm({ refresh, setRefresh }) {
               placeholder=" "
               required
               onChange={handleChange}
+              value={phoneNumber}
             />
             <label
               for="phoneNumber"
@@ -182,7 +214,7 @@ function CreateEmployeeForm({ refresh, setRefresh }) {
               name="contractType"
               value="Contract"
               className="w-4 h-4 text-[#04c4b2] border-gray-300 focus:ring-2 focus:ring-[#04c4b2] dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
-              checked={newEmployeeData.contractType === "Contract"}
+              //   checked={employee.contractType === "Contract"}
               onClick={handleChange}
             />
             <label
@@ -205,6 +237,7 @@ function CreateEmployeeForm({ refresh, setRefresh }) {
               placeholder=" "
               required
               onChange={handleChange}
+              value={startDate}
             />
             <label
               for="startDate"
@@ -224,6 +257,7 @@ function CreateEmployeeForm({ refresh, setRefresh }) {
               placeholder=" "
               required
               onChange={handleChange}
+              value={finishDate}
             />
             <label
               for="finishDate"
@@ -262,7 +296,7 @@ function CreateEmployeeForm({ refresh, setRefresh }) {
               name="workBasis"
               value="Part_time"
               className="w-4 h-4 text-[#04c4b2] border-gray-300 focus:ring-2 focus:ring-[#04c4b2] dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
-              checked={newEmployeeData.workBasis === "Part_time"}
+              checked={workBasis === "Part_time"}
               onClick={handleChange}
             />
             <label
@@ -287,6 +321,7 @@ function CreateEmployeeForm({ refresh, setRefresh }) {
             className="rounded-none rounded-e-lg bg-gray-50 border border-gray-300 text-gray-900 min-w-fit focus:ring-blue-500 focus:border-blue-500 block flex-1 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             required
             onChange={handleChange}
+            value={hoursPerWeek}
           />
         </div>
 
@@ -294,7 +329,7 @@ function CreateEmployeeForm({ refresh, setRefresh }) {
           type="submit"
           className="text-white bg-[#04c4b2] hover:bg-[#058078] focus:ring-4 focus:outline-none focus:ring-[#c7fff5] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
-          Create
+          Save
         </button>
       </form>
 
@@ -340,4 +375,4 @@ function CreateEmployeeForm({ refresh, setRefresh }) {
   );
 }
 
-export default CreateEmployeeForm;
+export default EditEmployeeForm;

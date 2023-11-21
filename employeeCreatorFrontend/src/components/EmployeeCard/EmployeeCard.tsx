@@ -1,5 +1,7 @@
+import { Link, NavLink } from "react-router-dom";
 import { deleteEmployeeById } from "../../services/employees";
 import { dateFormat } from "../../utils/dateFormat";
+import { useState } from "preact/hooks";
 
 function EmployeeCard({
   employee,
@@ -35,11 +37,6 @@ function EmployeeCard({
     // workBasis,
     // hoursPerWeek,
   } = employee;
-  console.log(new Date({ startDate }.startDate).toLocaleDateString());
-
-  //   const sd = new Date({ startDate }.startDate).toLocaleDateString();
-
-  //   const sd = dateFormat({ startDate }.startDate);
 
   const handleRemove = async () => {
     try {
@@ -68,7 +65,8 @@ function EmployeeCard({
         <p>{email}</p>
       </div>
       <div className="flex justify-end gap-2 self-start ">
-        <button>Edit</button>
+        <Link to={`/edit-employee/${id}`}>Edit</Link>
+
         <button className="border-l-2 pl-2" onClick={handleRemove}>
           Remove
         </button>
