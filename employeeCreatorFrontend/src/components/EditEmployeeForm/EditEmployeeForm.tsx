@@ -1,7 +1,7 @@
 import { useEffect, useState } from "preact/hooks";
 import { editEmployeeById, getEmployeeById } from "../../services/employees";
 import { useNavigate, useParams } from "react-router-dom";
-import { dateFormat } from "../../utils/dateFormat";
+import { dateSlice } from "../../utils/dateFormat";
 
 function EditEmployeeForm() {
   //   const initialData = {
@@ -237,7 +237,7 @@ function EditEmployeeForm() {
               placeholder=" "
               required
               onChange={handleChange}
-              value={startDate}
+              // value={dateSlice(startDate)}
             />
             <label
               for="startDate"
@@ -257,7 +257,7 @@ function EditEmployeeForm() {
               placeholder=" "
               required
               onChange={handleChange}
-              value={finishDate}
+              //   value={dateSlice(finishDate)}
             />
             <label
               for="finishDate"

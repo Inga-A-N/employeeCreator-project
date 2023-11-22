@@ -1,7 +1,6 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { deleteEmployeeById } from "../../services/employees";
 import { dateFormat } from "../../utils/dateFormat";
-import { useState } from "preact/hooks";
 
 function EmployeeCard({
   employee,
