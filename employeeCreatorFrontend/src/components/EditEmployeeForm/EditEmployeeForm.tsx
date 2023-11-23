@@ -3,34 +3,33 @@ import { editEmployeeById, getEmployeeById } from "../../services/employees";
 import { useNavigate, useParams } from "react-router-dom";
 import { dateSlice } from "../../utils/dateFormat";
 
-function EditEmployeeForm() {
-  //   const initialData = {
-  //     firstName: "",
-  //     middleName: "",
-  //     lastName: "",
-  //     email: "",
-  //     phoneNumber: "",
-  //     address: "",
-  //     contractType: "Permanent",
-  //     startDate: "",
-  //     finishDate: "",
-  //     workBasis: "Full_time",
-  //     hoursPerWeek: 0,
-  //   };
+function EditEmployeeForm({ refresh, setRefresh }) {
+  const initialData = {
+    firstName: "",
+    middleName: "",
+    lastName: "",
+    email: "",
+    phoneNumber: "",
+    address: "",
+    contractType: "",
+    startDate: "",
+    finishDate: "",
+    workBasis: "",
+    hoursPerWeek: 0,
+  };
 
   const { id } = useParams();
 
-  const [editEmployeeData, setEditEmployeeData] = useState({});
   const [error, setError] = useState(false);
   useEffect(() => {
     console.log("useEffect", id);
     getEmployeeById(parseInt(id)).then((res) => {
+      console.log("This is res: ", res);
+      dateSlice(res.finishDate);
       setEditEmployeeData(res);
-      console.log(id);
-      console.log(res);
     });
   }, [id]);
-
+  const [editEmployeeData, setEditEmployeeData] = useState(initialData);
   const {
     firstName,
     middleName,
@@ -44,6 +43,8 @@ function EditEmployeeForm() {
     workBasis,
     hoursPerWeek,
   } = editEmployeeData;
+
+  console.log(dateSlice(finishDate));
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -214,7 +215,7 @@ function EditEmployeeForm() {
               name="contractType"
               value="Contract"
               className="w-4 h-4 text-[#04c4b2] border-gray-300 focus:ring-2 focus:ring-[#04c4b2] dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
-              //   checked={employee.contractType === "Contract"}
+              checked={contractType === "Contract"}
               onClick={handleChange}
             />
             <label
@@ -237,7 +238,7 @@ function EditEmployeeForm() {
               placeholder=" "
               required
               onChange={handleChange}
-              // value={dateSlice(startDate)}
+              value={dateSlice(startDate)}
             />
             <label
               for="startDate"
@@ -257,7 +258,7 @@ function EditEmployeeForm() {
               placeholder=" "
               required
               onChange={handleChange}
-              //   value={dateSlice(finishDate)}
+              value={dateSlice(finishDate)}
             />
             <label
               for="finishDate"
