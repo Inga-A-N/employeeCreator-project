@@ -14,7 +14,7 @@ export const deleteEmployeeById = async (id: Number) => {
   }
 };
 
-export const createNewEmployee = async (data) => {
+export const createNewEmployee = async (data: {}) => {
   const response = await fetch("http://localhost:8080/employees", {
     method: "POST",
     headers: {
@@ -27,7 +27,7 @@ export const createNewEmployee = async (data) => {
   }
 };
 
-export const getEmployeeById = async (id: Number) => {
+export const getEmployeeById = async (id: string | undefined) => {
   const response = await fetch(`http://localhost:8080/employees/${id}`);
   console.log(response);
 
@@ -37,7 +37,7 @@ export const getEmployeeById = async (id: Number) => {
   return await response.json();
 };
 
-export const editEmployeeById = async (id: Number, data) => {
+export const editEmployeeById = async (id: string | undefined, data: {}) => {
   const response = await fetch(`http://localhost:8080/employees/${id}`, {
     method: "PATCH",
     headers: {

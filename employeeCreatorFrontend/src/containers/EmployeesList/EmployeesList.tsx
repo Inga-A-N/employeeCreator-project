@@ -1,6 +1,14 @@
 import EmployeeCard from "../../components/EmployeeCard/EmployeeCard";
 
-function EmployeesList({ employees, setRefresh, refresh }) {
+function EmployeesList({
+  employees,
+  setRefresh,
+  refresh,
+}: {
+  employees: [];
+  setRefresh: any;
+  refresh: number;
+}) {
   return (
     <div>
       <h1 className="text-xl font-bold">Employees list</h1>

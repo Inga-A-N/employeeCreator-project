@@ -23,7 +23,7 @@ function EditEmployeeForm({ refresh, setRefresh }) {
   const [error, setError] = useState(false);
   useEffect(() => {
     console.log("useEffect", id);
-    getEmployeeById(parseInt(id)).then((res) => {
+    getEmployeeById(id).then((res) => {
       console.log("This is res: ", res);
       dateSlice(res.finishDate);
       setEditEmployeeData(res);
@@ -65,7 +65,7 @@ function EditEmployeeForm({ refresh, setRefresh }) {
     }
   };
 
-  const mouseClick = (e) => {
+  const mouseClick = (e: MouseEvent) => {
     e.preventDefault();
     setError(false);
   };
